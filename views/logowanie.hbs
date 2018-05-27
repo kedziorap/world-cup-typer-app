@@ -1,0 +1,19 @@
+<section class="jumbotron bg-transparent">
+    <div class="container text-center">
+        <div class="slogan">
+            <h1>Super Typer <small>Rosja 2018</small></h1>
+            <p>Dołącz do zabawy i typuj wyniki wszystkich spotkań FIFA World Cup Russia 2018. Od pierwszeo do ostatniego dnia turnieju.</p>
+        </div>
+        <form class="form-signin main-form" method="post" action="logowanie/loguj">
+            <h1 class="h3 mb-3 font-weight-normal ">Zaloguj się</h1>
+            {{#if loginError}}
+            <p class="alert alert-danger">{{loginError}}</p>
+            {{/if}}
+            <label for="inputLogin" class="sr-only">Login</label>
+            <input type="text" id="inputLogin"  name="inputLogin" class="form-control" placeholder="Login" required autofocus>
+            <label for="inputPassword" class="sr-only">Hasło</label>
+            <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Hasło" required>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Zaloguj</button>
+        </form>
+    </div>
+</section>

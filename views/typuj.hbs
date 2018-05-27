@@ -1,0 +1,87 @@
+<main>
+    <section>
+        <div class="container">
+            <h2 class="text-center">Kolejka {{kolejka}}</h2>
+            <a href="/typowanie" class="btn btn-info">Wybór kolejki</a>
+            <p>Wytypowano <span id="counter">{{typesReady typy}}</span></p>
+            <div class="table-responsive">
+                <table class="table table-type table-striped">
+                    <tbody>
+                        {{#each typy}}
+                            {{#if (isTimed this.status)}}
+                                {{#if (canVote this.date)}}
+                                <tr>
+                                    <form action="/typowanie/send/{{kolejka}}/{{this.id_match}}" method="POST">
+                                        <td>{{this.homeTeamName}}</td>
+                                        <td>
+                                            <input type="text" id="home{{this.id_match}}" class="form-control form-control-sm result-input" maxlength="1" name="home" value="{{#if this.typed}}{{this.home_score}}{{/if}}"> :
+                                            <input type="text" id="away{{this.id_match}}" class="form-control form-control-sm result-input" maxlength="1" name="away" value="{{#if this.typed}}{{this.away_score}}{{/if}}">
+                                        </td>
+                                        <td>{{this.awayTeamName}}</td>
+                                        <td><small>{{showDate this.date}}</small></td>
+                                        <td class="text-center" id="icon{{this.id_match}}">
+                                            {{#if this.typed}}
+                                            <i class="fas fa-check-circle text-success"></i>
+                                            {{else}}
+                                            <i class="fas fa-exclamation-circle text-danger"></i>
+                                            {{/if}}
+                                        </td>
+                                        <td><button id="{{this.id_match}}" data-id="{{this.id_match}}" type="submit"  class="btn btn-sm btn-secondary">Typuj</button></td>
+                                    </form>
+                                </tr>
+                                {{else}}
+                                    <tr class="bg-block">
+                                        <td>{{this.homeTeamName}}</td>
+                                        <td>
+                                            {{this.home_score}} : {{this.away_score}}
+                                        </td>
+                                        <td>{{this.awayTeamName}}</td>
+                                        <td><span class="badge badge-danger">koniec typowania</span></td>
+                                        <td class="text-center">
+                                            {{#if this.typed}}
+                                            <i class="fas fa-check-circle text-success"></i>
+                                            {{else}}
+                                            <i class="fas fa-exclamation-circle text-danger"></i>
+                                            {{/if}}
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                {{/if}}
+                            
+                            {{else if (isFinished this.status)}}
+                            <tr class="bg-block">
+                                <td>{{this.homeTeamName}}</td>
+                                <td>
+                                    {{this.home_score}} : {{this.away_score}}
+                                </td>
+                                <td>{{this.awayTeamName}}</td>
+                                <td><span class="badge badge-success">zakończony</span></td>
+                                <td>
+                                {{#if this.typed}}
+                                    wynik: 
+                                    {{this.goalsHomeTeam}}:{{this.goalsAwayTeam}}
+                                {{else}}
+                                    brak typu
+                                {{/if}}
+                                </td>
+                                <td>{{this.points}} pkt</td>
+                            </tr>
+                            {{else}}
+                            <tr class="bg-block">
+                                <td>{{this.homeTeamName}}</td>
+                                <td>
+                                    - : -
+                                </td>
+                                <td>{{this.awayTeamName}}</td>
+                                <td><span class="badge badge-warning">niedostępne</span></td>
+                                <td><small>{{showDate this.date}}</small></td>
+                                <td></td>
+                            </tr>
+                            {{/if}}
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</main>

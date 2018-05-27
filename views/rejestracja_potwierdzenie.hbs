@@ -1,0 +1,12 @@
+<main>
+    <div class="container"> 
+        <section class="content">
+          {{#if user}}
+            <p>Aktywuj konto <strong>{{user.login}}</strong> naciskając poniższy przycisk</p>
+              <form action="active" method="post">
+                  <input type="submit" value="Aktywuj" class="btn btn-success">
+              </form>
+          {{/if}}
+        </section>
+    </div>
+</main>

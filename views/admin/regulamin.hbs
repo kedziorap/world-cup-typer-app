@@ -1,0 +1,16 @@
+<main>
+    <section>
+        <div class="container">
+            <h2 class="text-center">Regulamin</h2>
+
+
+            <form method="post" action="/admin/regulamin/sendreg">
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Treść regulaminu</label>
+                    <textarea class="form-control" id="reg" name="reg" rows="3">{{content}}</textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </section>
+</main>

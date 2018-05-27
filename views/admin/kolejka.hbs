@@ -1,0 +1,40 @@
+<main>
+    <section>
+        <div class="container">
+            <h2 class="text-center">Edycja meczów</h2>
+            <a href="/admin/mecze" class="btn btn-primary">Wróc do wyboru kolejki</a>
+            <div class="table-responsive">
+                <table class="table table-type">
+                    <tbody>
+                        {{#each result}}
+                        <tr {{#if (isFinished this.status)}} class="finished" {{else if (isScheduled this.status)}} class="scheduled" {{else if (cannotVote (canVote this.date))}} class="going" {{/if}}>
+                            <form action="/admin/mecze/addResult/{{this.matchday}}/{{this.id}}" method="post">
+                                <td>
+                                    <input type="text" name="homeTeamName" id="homeTeamName" value="{{this.homeTeamName}}" class="form-control form-control-sm">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control form-control-sm result-input" maxlength="1" name="home" value="{{this.goalsHomeTeam}}"> :
+                                    <input type="text" class="form-control form-control-sm result-input" maxlength="1" name="away" value="{{this.goalsAwayTeam}}">
+                                </td>
+                                <td>
+                                    <input type="text" name="awayTeamName" id="awayTeamName" value="{{this.awayTeamName}}" class="form-control form-control-sm">
+                                </td>
+                                <td>
+                                    <select name="status">
+                                        <option value="TIMED" {{#if (isTimed this.status)}} selected {{/if}}>TIMED</option>
+                                        <option value="FINISHED" {{#if (isFinished this.status)}} selected {{/if}}>FINISHED</option>
+                                        <option value="SCHEDULED" {{#if (isScheduled this.status)}} selected {{/if}}>SCHEDULED</option>
+                                    </select> 
+                                </td>
+                                <td>
+                                    <input type="submit" value="OK" class="btn btn-success btn-sm">
+                                </td>
+                            </form>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</main>

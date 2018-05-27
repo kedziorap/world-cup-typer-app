@@ -1,0 +1,49 @@
+const express = require('express');
+const router = express.Router();
+const connect = require('../db/db-mysql-connect');
+
+router.get('/', (req,res)=>{
+    if (req.session.user) {
+        res.redirect('/')
+    } else {
+        res.render('logowanie', {
+            loginError: req.session.loginError, 
+            layout: 'nologin'  
+        });
+        delete req.session.loginError;   
+    }
+});
+
+router.post('/loguj', (req, res) => {
+    if (req.session.user) {
+        res.redirect('/logowanie')
+    } else {
+        const login = req.body.inputLogin;
+        const password = req.body.inputPassword;
+        console.log(req.body);
+        connect.query(`SELECT id, \`range\`, active FROM users WHERE login='${login}' AND password='${password}'`, (err, result)=>{
+            if (err) throw err;
+            if (result.length) {
+                if (result[0].active === 0) {
+                    req.session.loginError = 'Konto nieaktywowane. Kliknij w link aktywacyjny w mailu.';
+                    res.redirect('/logowanie');
+                } else {
+                    req.session.user = {
+                        id: result[0].id,
+                        range: result[0].range
+                    }
+                    if (result[0].range === 'admin') {
+                        res.redirect('/admin/posty');
+                    } else {
+                        res.redirect('/');   
+                    }
+                }
+            } else {
+                req.session.loginError = 'Nieporawne dane';
+                res.redirect('/logowanie');
+            }
+        });
+    }
+});
+
+module.exports = router;

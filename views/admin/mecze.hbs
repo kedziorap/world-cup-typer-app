@@ -1,0 +1,13 @@
+<main>
+    <section>
+        <div class="container">
+            <h2 class="text-center">Edycja meczów</h2>
+            <p>Wybierz kolejkę</p>
+            <ul class="list-group">
+                {{#each kol}}
+                <a href="/admin/mecze/{{inc @index}}" class="list-group-item d-flex justify-content-between align-items-center">Kolejka {{inc @index}}</a>
+                {{/each}}
+            </ul>
+        </div>
+    </section>
+</main>

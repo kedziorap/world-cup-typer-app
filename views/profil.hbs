@@ -1,0 +1,63 @@
+<section>
+    <div class="container">
+        <h2 class="text-center">Twój profil</h2>
+        <div class="table-responsive">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th scope="row" class="text-right">nazwa użytkownika</th>
+                        <td> {{user.login}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="text-right">data dołączenia</th>
+                        <td>{{showDate user.date}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="text-right">adres mailowy</th>
+                        <td>{{user.email}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="text-right">punkty</th>
+                        <td>{{user.pts}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+            <h3 class="text-center">Zmiana hasła</h3>
+            {{#if error}}
+            <div class="alert alert-danger text-center" role="alert">
+                {{error}}
+            </div>
+            {{/if}}
+            {{#if success}}
+            <div class="alert alert-success text-center" role="alert">
+                {{success}}
+            </div>
+            {{/if}}
+            <form action="/profil/sendNewPswd" method="post" class="form-mine">
+                <div class="form-group row">
+                    <label for="oldPswd" class="col-sm-4 col-form-label text-right">Stare hasło: </label>
+                    <div class="col-sm-8">
+                        <input id="oldPswd" name="oldPswd" type="password" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="newPswd" class="col-sm-4 col-form-label text-right">Nowe hasło: </label>
+                    <div class="col-sm-8">
+                        <input id="newPswd" name="newPswd" type="password" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="repNewPswd" class="col-sm-4 col-form-label text-right">Powtórz nowe hasło: </label>
+                    <div class="col-sm-8">
+                        <input id="repNewPswd" name="repNewPswd" type="password" class="form-control" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-center">
+                        <input type="submit" value="Zmień hasło" class="btn btn-secondary">
+                    </div>
+                </div>
+            </form>
+    </div>
+</section>

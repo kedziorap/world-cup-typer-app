@@ -1,0 +1,27 @@
+<main>
+    <section>
+        <div class="container">
+            <h2>{{player.login}}</h2>
+            {{#if mecze}}
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody>
+                        {{#each mecze }}
+                        <tr>
+                            <td>{{this.homeTeamName}} - {{this.awayTeamName}} {{this.goalsHomeTeam}}:{{this.goalsAwayTeam}}</td>
+                            <td>
+                                {{#if this.typed}} typ: {{this.home_score}}:{{this.away_score}} {{else}} brak typu {{/if}}
+                            </td>
+                            <td>punkty: {{this.points}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+            {{else}}
+            <p class="">Tu będą informacje o typach gracza po zakończeniu spotkań</p>
+            {{/if}}
+            
+        </div>
+    </section>
+</main>

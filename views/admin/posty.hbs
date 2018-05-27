@@ -1,0 +1,20 @@
+<main>
+    <section>
+        <div class="container">
+            <h2 class="text-center">Newsy</h2>
+            <a href="/admin/posty/new" class="btn btn-success">Dodaj nowy</a>
+            <h3>Lista postów</h3>
+            {{#each posts}}
+            <article>
+                <h4>{{this.title}}</h4>
+                <p>{{this.date}}</p>
+                <p>{{this.content}}</p>
+                <form action="/admin/posty/delete/{{this.id}}" method="post">
+                   <a href="/admin/posty/edit/{{this.id}}" class="btn btn-primary">Edytuj</a>
+                    <input type="submit" class="btn btn-danger" value="Usuń">
+                </form>
+            </article>
+            {{/each}}
+        </div>
+    </section>
+</main>

@@ -1,0 +1,33 @@
+<main>
+    <section>
+        <div class="container">
+            <h2 class="text-center">{{mecz.homeTeamName}} - {{mecz.awayTeamName}} {{mecz.goalsHomeTeam}}:{{mecz.goalsAwayTeam}} </h2>
+           <div class="table-responsive">
+               {{# if typy}}
+               <table class="table table-striped table-hover">
+                   <thead>
+                       <tr>
+                           <th>gracz</th>
+                           <th>typ</th>
+                           <th>punkty</th>
+                       </tr>
+                   </thead>
+                   <tbody>
+                       {{#each typy}}
+                       <tr>
+                           <td><a href="/gracz/{{this.id}}">{{this.login}}</a></td>
+                           <td>{{#if this.typed}}
+                               {{this.home_score}}:{{this.away_score}}
+                               {{else}}
+                               brak typu
+                               {{/if}}</td>
+                           <td>{{this.points}}</td>
+                       </tr>
+                       {{/each}}
+                   </tbody>
+               </table>
+               {{/if}}
+           </div>
+        </div>
+    </section>
+</main>

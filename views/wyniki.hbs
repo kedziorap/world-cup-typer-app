@@ -1,0 +1,25 @@
+<main>
+    <section>
+        <div class="container">
+            <h2 class="text-center">Wyniki</h2>
+            {{# if matches}}
+            <div class="table-responsive">
+                <table class="table table-type">
+                    <tbody>
+                        {{#each matches}}
+                        <tr>
+                            <td class="text-right">{{this.homeTeamName}}</td>
+                            <td class="text-center">{{this.goalsHomeTeam}} : {{this.goalsAwayTeam}}</td>
+                            <td>{{this.awayTeamName}}</td>
+                            <td><a href="/mecz/{{this.id}}" class="btn btn-secondary">Zobacz typy graczy</a></td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+            {{else}}
+            <p>W tym miejscu będą dostępne wyniki spotkań wraz z typami Graczy.</p>
+            {{/if}}
+        </div>
+    </section>
+</main>

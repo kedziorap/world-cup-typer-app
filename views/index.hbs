@@ -1,0 +1,14 @@
+<main>
+   <section>
+       <div class="container">
+          <h2 class="text-center">Aktualności</h2>
+           {{# each news}}
+           <article class="post">
+               <h3>{{this.title}}</h3>
+               <p class="small font-italic">{{showDate this.date}}</p>
+               <p>{{this.content}}</p>
+           </article>
+           {{/each}}
+       </div>
+   </section>
+</main>
