@@ -7,10 +7,12 @@ router.get('/', (req,res)=>{
         res.redirect('/')
     } else {
         res.render('logowanie', {
-            loginError: req.session.loginError, 
+            loginError: req.session.loginError,
+            registerSuccess: req.session.registerSuccess,
             layout: 'nologin'  
         });
         delete req.session.loginError;   
+        delete req.session.registerSuccess;   
     }
 });
 

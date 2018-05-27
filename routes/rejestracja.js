@@ -81,6 +81,7 @@ router.post('/sendForm', (req,res)=>{
                                     connect.query(`CALL create_types(${id})`, (err, result)=> {
                                         if (err) throw err;
                                         connect.query(`UPDATE users SET active=1 WHERE email='${req.body.email}'`, (err, result) => {
+                                            req.session.registerSuccess = 1;
                                             res.redirect('/'); 
                                         }); 
                                     });
