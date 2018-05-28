@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app"
+    "start": "nodemon app.js"
   },
   "keywords": [],
   "author": "Piotr Kędziora",
@@ -18,6 +18,7 @@
     "express-validator": "^5.1.0",
     "mysql": "^2.15.0",
     "nodemailer": "^4.6.5",
+    "nodemon": "^1.17.5",
     "xoauth2": "^1.2.0"
   }
 }
