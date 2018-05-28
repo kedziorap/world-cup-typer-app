@@ -61,7 +61,9 @@ router.post('/send/:kolejka/:idMatch', (req, res) =>{
                     if(result.length && myFunctions.voteIsPossible(result[0].date)) {
                         console.log(result);
                         if (result[0].status === 'TIMED' ) {
-                            connect.query('UPDATE `types` SET home_score='+home+', away_score='+away+', typed=1 WHERE id_user='+idUser+' AND id_match='+idMatch, (err, result)=>{
+                            const date = new Date();
+                            const now = date.toJSON();
+                            connect.query('UPDATE `types` SET home_score='+home+', away_score='+away+', typed=1, date="'+now+'" WHERE id_user='+idUser+' AND id_match='+idMatch, (err, result)=>{
                                 if (err) throw err;
                                 res.redirect('/typowanie/kolejka/'+kolejka);
                             });
@@ -94,7 +96,9 @@ router.post('/:kolejka/ajax/send/:mecz', (req, res)=> {
                     if (err) throw err;
                     if(result.length && myFunctions.voteIsPossible(result[0].date) && idUser) {
                         if (result[0].status === 'TIMED' ) {
-                            connect.query('UPDATE `types` SET home_score='+home+', away_score='+away+', typed=1 WHERE id_user='+idUser+' AND id_match='+idMatch, (err, result)=>{
+                            const date = new Date();
+                            const now = date.toJSON();
+                            connect.query('UPDATE `types` SET home_score='+home+', away_score='+away+', typed=1, date="'+now+'" WHERE id_user='+idUser+' AND id_match='+idMatch, (err, result)=>{
                                 if (err) throw err;
                                 res.write('ok')
                                 res.end();

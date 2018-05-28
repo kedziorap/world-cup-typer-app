@@ -23,7 +23,7 @@ router.post('/loguj', (req, res) => {
         const login = req.body.inputLogin;
         const password = req.body.inputPassword;
         console.log(req.body);
-        connect.query(`SELECT id, \`range\`, active FROM users WHERE login='${login}' AND password='${password}'`, (err, result)=>{
+        connect.query(`SELECT id, \`range\`, active FROM users WHERE login='${login}' AND password=PASSWORD('${password}')`, (err, result)=>{
             if (err) throw err;
             if (result.length) {
                 if (result[0].active === 0) {

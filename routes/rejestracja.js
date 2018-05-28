@@ -70,7 +70,7 @@ router.post('/sendForm', (req,res)=>{
                     } else {
                         const date = new Date();
                         const now = date.toJSON();
-                        connect.query(`INSERT INTO users (login, name, email, password, \`range\`, date, active) VALUES ('${req.body.login}', '${req.body.name}', '${req.body.email}', '${req.body.password}','user','${now}', 0)`, (err, result)=>{
+                        connect.query(`INSERT INTO users (login, name, email, password, \`range\`, date, active) VALUES ('${req.body.login}', '${req.body.name}', '${req.body.email}', PASSWORD('${req.body.password}'),'user','${now}', 0)`, (err, result)=>{
                            if (err) throw err;
                             connect.query(`SELECT * FROM users WHERE email='${req.body.email}' AND active=0`, (err, result)=> {
                                 if (err) throw err;
