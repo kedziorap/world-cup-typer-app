@@ -16,6 +16,7 @@ const logowanie = require('./logowanie');
 const wyloguj = require('./wyloguj');
 
 // ROUTES
+
 router.use('/', index);
 router.use('/ranking', ranking);
 router.use('/gracz', players);

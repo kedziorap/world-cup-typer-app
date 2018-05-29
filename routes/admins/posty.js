@@ -8,7 +8,7 @@ router.get('/', (req, res)=>{
         if(req.session.user.range == 'admin') {
             connect.query('SELECT * FROM news ORDER BY date DESC', (err, result)=> {
                 result.forEach(post=> post.content = post.content.substr(0,200)+'...');
-                if (err) throw err;
+                if (err) res.send('<h1>Błąd połaczenia z bazą danych</h1>');
                 else {
                     res.render('admin/posty',{
                         posts: result,
@@ -29,6 +29,7 @@ router.post('/delete/:id', (req,res)=>{
         if(req.session.user.range == 'admin') {
             const idPost = req.params.id;
             connect.query(`DELETE FROM news WHERE id=${idPost}`, (err, result) => {
+                if (err) res.send('<h1>Błąd połaczenia z bazą danych</h1>');
                 res.redirect('/admin/posty');
             }); 
         } else {
@@ -45,7 +46,7 @@ router.get('/edit/:id', (req, res)=> {
         if(req.session.user.range == 'admin') {
             const idPost = req.params.id;
             connect.query(`SELECT * FROM news WHERE id=${idPost}`, (err, result) => {
-                if (err) throw err;
+                if (err) res.send('<h1>Błąd połaczenia z bazą danych</h1>');
                 else {
                     if(result.length) {
                         const post = result[0];
@@ -73,7 +74,7 @@ router.post('/edit/:id', (req, res)=> {
             const title = req.body.title;
             const content = req.body.content;
             connect.query(`UPDATE news SET title='${title}', content='${content}' WHERE id=${id}`, (err, result) => {
-                if (err) throw err;
+                if (err) res.send('<h1>Błąd połaczenia z bazą danych</h1>');
                 else {
                     res.redirect('/admin/posty');
                 }
@@ -107,9 +108,8 @@ router.post('/new/add', (req, res)=> {
             const date = now.toJSON();
             const title = req.body.title;
             const content = req.body.content;
-            console.log(req.body)
             connect.query(`INSERT INTO news (date, title, content) VALUES ('${date}','${title}','${content}')`, (err, result) => {
-                if (err) throw err; 
+                if (err) res.send('<h1>Błąd połaczenia z bazą danych</h1>');
                 else {
                     res.redirect('/admin/posty');
                 }

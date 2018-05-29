@@ -4,6 +4,7 @@ const connect = require('../db/db-mysql-connect');
 
 router.get('/', (req, res) => {
     connect.query('SELECT * FROM pages WHERE name="regulamin"', (error, result)=>{
+        if (error) res.send('<h1>Błąd połaczenia z bazą danych</h1>');
        if (!result.length) {
            res. render('404');
        } else {

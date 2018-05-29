@@ -9,7 +9,6 @@ router.post('/:idMatch', (req, res) =>{
     const home = Number(req.body.homeScore);
     const away = Number(req.body.awayScore);
     const idMatch=req.params.idMatch;
-    console.log(idMatch)
     if (isNaN(home) || isNaN(away)) res.redirect('/typuj');
     else {
         connect.query('SELECT `status` FROM matches WHERE id='+idMatch, (err, result)=>{

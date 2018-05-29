@@ -8,6 +8,7 @@ router.get('/:match', (req, res) =>{
     if (req.session.user) {
         const id = req.params.match;
         connect.query(`SELECT id, status, homeTeamName, awayTeamName, goalsHomeTeam, goalsAwayTeam FROM matches WHERE id=${id}`, (error, result) =>{
+            if (error) res.send('<h1>Błąd połaczenia z bazą danych</h1>');
             if (!result.length || result[0].status !== 'FINISHED') {
                 if (req.session.user.range === 'user') {
                     res.render('404');

@@ -74,10 +74,8 @@ router.post('/sendForm', (req,res)=>{
                            if (err) throw err;
                             connect.query(`SELECT * FROM users WHERE email='${req.body.email}' AND active=0`, (err, result)=> {
                                 if (err) throw err;
-                                console.log(result)
                                 if (result.length) {
                                     const id = result[0].id;
-                                    console.log(result)
                                     connect.query(`CALL create_types(${id})`, (err, result)=> {
                                         if (err) throw err;
                                         connect.query(`UPDATE users SET active=1 WHERE email='${req.body.email}'`, (err, result) => {

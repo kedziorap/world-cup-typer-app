@@ -7,7 +7,7 @@ router.get('/', (req,res)=>{
     if (req.session.user) {
         if (req.session.user.range === 'user') {
             connect.query('SELECT * FROM news ORDER BY id DESC LIMIT 5', (err, result, fields)=>{
-                if (err) throw err;
+                if (err) res.send('<h1>Błąd połaczenia z bazą danych</h1>');
                 if (result.length) {
                     res.render('index', {
                         news: result 

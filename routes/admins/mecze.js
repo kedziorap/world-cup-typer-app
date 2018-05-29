@@ -58,7 +58,7 @@ router.post('/addResult/:kolejka/:mecz', (req, res)=> {
                 res.redirect('/admin/mecze/'+kolejka);
             } else {
                 connect.query(`UPDATE matches SET homeTeamName='${homeTeamName}', awayTeamName='${awayTeamName}', goalsHomeTeam=${goalsHomeTeam}, goalsAwayTeam=${goalsAwayTeam}, status='${status}' WHERE id=${mecz}`, (err, result)=>{
-                    if (err) throw err;
+                    if (err) res.send('<h1>Błąd połaczenia z bazą danych</h1>');
                     else {
                         if (status === 'FINISHED') {
                             connect.query(myQuery.onePointsAdd(mecz), (err, result)=>{

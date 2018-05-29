@@ -22,9 +22,8 @@ router.post('/loguj', (req, res) => {
     } else {
         const login = req.body.inputLogin;
         const password = req.body.inputPassword;
-        console.log(req.body);
         connect.query(`SELECT id, \`range\`, active FROM users WHERE login='${login}' AND password=PASSWORD('${password}')`, (err, result)=>{
-            if (err) throw err;
+            if (err) res.send('<h1>Błąd połaczenia z bazą danych</h1>');
             if (result.length) {
                 if (result[0].active === 0) {
                     req.session.loginError = 'Konto nieaktywowane. Kliknij w link aktywacyjny w mailu.';

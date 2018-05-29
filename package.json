@@ -2,10 +2,12 @@
   "name": "app-typer",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "forever": "forever start app.js",
+    "stop": "forever stop app.js"
   },
   "keywords": [],
   "author": "Piotr Kędziora",
@@ -16,6 +18,8 @@
     "express-handlebars": "^3.0.0",
     "express-session": "^1.15.6",
     "express-validator": "^5.1.0",
+    "forever": "^0.15.3",
+    "forever-monitor": "^1.7.1",
     "mysql": "^2.15.0",
     "nodemailer": "^4.6.5",
     "nodemon": "^1.17.5",

@@ -59,7 +59,6 @@ router.post('/send/:kolejka/:idMatch', (req, res) =>{
                 connect.query('SELECT status, date FROM matches WHERE id='+idMatch, (err, result)=>{
                     if (err) throw err;
                     if(result.length && myFunctions.voteIsPossible(result[0].date)) {
-                        console.log(result);
                         if (result[0].status === 'TIMED' ) {
                             const date = new Date();
                             const now = date.toJSON();

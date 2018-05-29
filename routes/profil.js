@@ -33,27 +33,29 @@ router.get('/', (req,res) => {
 router.post('/sendNewPswd', (req, res)=>{
     if (req.session.user) {
         if (req.session.user.range ==='user') {
-            connect.query('SELECT * FROM users WHERE id='+req.session.user.id, (error,result)=>{
+            connect.query('SELECT * FROM users WHERE id='+req.session.user.id+' AND password=PASSWORD("'+req.body.oldPswd+'")', (error,result)=>{
                 if (error) throw error;
                 else {
                     const user = result[0];
                     const oldPswd = req.body.oldPswd;
                     const newPswd = req.body.newPswd;
                     const repeatNewPswd = req.body.repNewPswd;
-                    if (oldPswd !== user.password) {
+                    if(result.length) {
+                        if (newPswd !== repeatNewPswd) {
+                            req.session.changePswdError = 'Hasła są różne';
+                            res.redirect('/profil');
+                        } else if (newPswd.length < 6) {
+                            req.session.changePswdError = 'Podane hasło jest za krótkie';
+                            res.redirect('/profil');
+                        } else {
+                            connect.query(`UPDATE users SET password=PASSWORD('${newPswd}') WHERE id=${req.session.user.id}`, (err, result)=>{
+                                req.session.changePswdSuccess = 'Hasło zostało zmienione';
+                                res.redirect('/profil');
+                            });
+                        }
+                    } else {
                         req.session.changePswdError = 'Podano nieprawidłowe hasło';       
                         res.redirect('/profil');
-                    } else if (newPswd !== repeatNewPswd) {
-                        req.session.changePswdError = 'Hasła są różne';
-                        res.redirect('/profil');
-                    } else if (newPswd.length < 6) {
-                        req.session.changePswdError = 'Podane hasło jest za krótkie';
-                        res.redirect('/profil');
-                    } else {
-                        connect.query(`UPDATE users SET password='${newPswd}' WHERE id=${req.session.user.id}`, (err, result)=>{
-                            req.session.changePswdSuccess = 'Hasło zostało zmienione';
-                            res.redirect('/profil');
-                        });
                     }
                 }
             });
