@@ -1,0 +1,12 @@
+<main>
+    <section>
+        <div class="container">
+            <h2 class="text-center">Typy</h2>
+            <ul class="list-group">
+                {{#each wytypowane}}
+                <li class="list-group-item d-flex justify-content-between align-items-center">{{this.login}} <span class="badge badge-success badge-pill">{{this.typy}}/{{../mecze}}</span></li>
+                {{/each}}
+            </ul>
+        </div>
+    </section>
+</main>

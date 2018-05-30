@@ -5,6 +5,7 @@ const matchdayMake = require('../../conf/conf-functions');
 const regulamin = require('./regulamin');
 const posty = require('./posty');
 const mecze = require('./mecze');
+const typy = require('./typy');
 
 router.get('/', (req, res)=>{
     if (req.session.user) {
@@ -23,5 +24,6 @@ router.get('/', (req, res)=>{
 router.use('/regulamin', regulamin);
 router.use('/posty', posty);
 router.use('/mecze', mecze);
+router.use('/typy', typy);
 
 module.exports = router;
