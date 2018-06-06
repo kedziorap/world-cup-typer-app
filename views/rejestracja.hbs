@@ -2,9 +2,13 @@
     <div class="container"> 
         <section class="content">
             <h2 class="text-center">Rejestracja</h2>
+            {{#if (usersLimit ilosc)}}
+            <p class="alert alert-info">Rejestracja nie jest możliwa. Osiągnięto limit 20 graczy. Jeśli bardzo chcesz dołączyć do zabawy napisz na supertypergame@gmail.com</p>
+            {{else}}
+            
             {{#if errors}}
             {{#each errors}}
-                <p class="alert alert-danger text-center">{{this.msg}}</p>
+            <p class="alert alert-danger text-center">{{this.msg}}</p>
             {{/each}}
             {{/if}}
             <form class="main-form" method="post" action="/rejestracja/sendForm">
@@ -31,15 +35,16 @@
                 <div class="form-group">
                     <label for="passwordRepeat">Powtórz hasło</label>
                     <input type="password" class="form-control" id="passwordRepeat" name="passwordRepeat"  placeholder="Powtórz hasło" required>
-                    
+
                 </div>
-                
+
                 <div class="form-group form-check">
                     <input type="checkbox" class="form-check-input" id="regulamin" name="regulamin" required>
                     <label class="form-check-label" for="regulamin">Akceptuję <a href="/regulamin" target="_blank" class="">regulamin</a></label>
                 </div>
                 <button type="submit" class="btn btn-primary">Zarejestruj</button>
             </form>
+            {{/if}}
         </section>
     </div>
 </main>

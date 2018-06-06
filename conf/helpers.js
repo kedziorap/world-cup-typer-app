@@ -2,6 +2,7 @@ const ad0 = liczba => {
     if (liczba < 10) return '0'+liczba;
     else return liczba;
 }
+const limit = 20;
 module.exports = {
     
     pointsEnd: (point)=> {
@@ -45,6 +46,10 @@ module.exports = {
     cannotVote: a => {
         if (a === true) return false;
         else return true;
+    },
+    usersLimit: ilosc=>{
+        if (ilosc>=limit) return true;
+        else return false;
     }
     
 }

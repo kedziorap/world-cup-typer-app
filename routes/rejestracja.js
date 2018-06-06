@@ -6,11 +6,18 @@ router.get('/', (req, res) => {
     if (req.session.user) {
         res.redirect('/');
     } else {
-        res.render('rejestracja',{
-            errors: req.session.registerErrors,
-            layout: 'nologin'
-        });
-        delete req.session.registerErrors;
+        connect.query(`SELECT COUNT (login) as ilosc FROM users`, (err, result)=>{
+            if (err) throw err;
+            else {
+                console.log(result[0].ilosc);
+                res.render('rejestracja',{
+                    errors: req.session.registerErrors,
+                    layout: 'nologin',
+                    ilosc: result[0].ilosc
+                });
+                delete req.session.registerErrors;
+            }
+        })
     }
 });
 
